@@ -1,12 +1,56 @@
-// This is a placeholder file which shows how you can access functions defined in other files.
-// It can be loaded into index.html.
-// You can delete the contents of the file once you have understood how it works.
-// Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
-// You can't open the index.html file using a file:// URL.
+import { getData, setData, getUserIds } from "./storage.js";
 
-import { getUserIds } from "./storage.js";
+const dropdownUsername = document.getElementById("dropdown-username");
 
-window.onload = function () {
-  const users = getUserIds();
-  document.querySelector("body").innerText = `There are ${users.length} users`;
-};
+const userIds = getUserIds();
+
+// initialize user 1 with some bookmarks if empty
+if (!getData("1")) {
+  setData("1", [
+    {
+      title: "Cool site",
+      description: "This is a really cool site",
+      url: "https://example.com",
+      createdAt: new Date().toISOString(),
+      likes: 0
+    }
+  ]);
+}
+
+// populating user dropdown
+userIds.forEach((id) => {
+  const option = document.createElement("option");
+  option.value = id;
+  option.textContent = `User ${id}`;
+  dropdownUsername.appendChild(option);
+});
+
+dropdownUsername.value = "";
+
+// tracking active user with event listener
+let activeUser = null;
+
+dropdownUsername.addEventListener("change", (e) => {
+  activeUser = e.target.value;
+  displayBookmarks();
+})
+
+const bookmarkList = document.getElementById("bookmark-list");
+
+// displaying bookmarks of a certain user
+function displayBookmarks() {
+  bookmarkList.innerHTML = "<h2>Bookmark List</h2>"; 
+
+  if (!activeUser) return;
+
+  const bookmarks = getData(activeUser) || [];
+
+  if (bookmarks.length === 0) {
+    const msg = document.createElement("p");
+    msg.textContent = "No bookmarks yet";
+    bookmarkList.appendChild(msg);
+    return;
+  }
+}
+
+// bookmark rendering

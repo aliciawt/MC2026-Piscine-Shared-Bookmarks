@@ -8,12 +8,19 @@
     <title>Bookmark App</title>
 
     <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js"></script>
   </head>
 
   <body>
     <main>
       <h1>Shared Bookmarks App</h1>
+
+      <div>
+        <label for="dropdown-username">Select user:</label>
+        <select id="dropdown-username">
+          <option value="" selected disabled>Click to select</option>
+        </select>
+      </div>
 
       <form id="new-bookmark-form">
         <label for="input-bookmark-title">Bookmark title: </label>
@@ -24,12 +31,6 @@
         <input id="input-url" type="url" required>
         <button id="add-new-bookmark" type="submit">Add New Bookmark</button>
       </form>
-
-      <div>
-        <label for="dropdown-username">Select user:</label>
-        <select id="dropdown-username">
-        </select>
-      </div>
 
       <section id="bookmark-list">
         <h2>Bookmark List</h2>
