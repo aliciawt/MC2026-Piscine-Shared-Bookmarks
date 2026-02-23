@@ -6,7 +6,110 @@
 
 import { getUserIds } from "./storage.js";
 
-window.onload = function () {
-  const users = getUserIds();
-  document.querySelector("body").innerText = `There are ${users.length} users`;
-};
+ function getBookmarksByUser(userId) {
+  const allBookmarks = JSON.parse(localStorage.getItem('bookmarks') || '[]');
+  return allBookmarks.filter(b => b.userId === userId);
+}
+
+ function addBookmark(bookmark) {
+  const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+  allBookmarks.push(bookmark);
+  localStorage.setItem("bookmarks", JSON.stringify(allBookmarks));
+}
+
+// Wait for DOM to load
+window.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("new-bookmark-form");
+  const titleInput = document.getElementById("input-bookmark-title");
+  const descInput = document.getElementById("input-bookmark-description");
+  const urlInput = document.getElementById("input-url");
+  const userDropdown = document.getElementById("dropdown-username");
+  const bookmarkList = document.getElementById("bookmark-list");
+  const template = document.getElementById("bookmark-template");
+
+  //  Load users into dropdown
+  function loadUsers() {
+    const users = getUserIds();
+    userDropdown.innerHTML = "";
+    users.forEach(userId => {
+      const option = document.createElement("option");
+      option.value = userId;
+      option.textContent = userId;
+      userDropdown.appendChild(option);
+    });
+
+    if (users.length > 0) {
+      renderUserBookmarks(users[0]);
+    }
+  }
+
+  //  Render bookmarks for selected user
+function renderUserBookmarks(userId) {
+    //Remove old bookmark cards
+    bookmarkList.querySelectorAll(".bookmark-card, .empty-message").forEach(el => el.remove());
+
+    const bookmarks = getBookmarksByUser(userId);
+    console.log (bookmarks)
+
+    if (bookmarks.length === 0) {
+      const p = document.createElement("p");
+      p.textContent = "No bookmarks yet for this user.";
+      p.className = "empty-message";
+      bookmarkList.appendChild(p);
+      return;
+    }
+
+    bookmarks.forEach(bookmark => {
+      const clone = template.content.cloneNode(true);
+
+      clone.querySelector(".bookmark-title").textContent = bookmark.title;
+      clone.querySelector(".bookmark-description").textContent = bookmark.description;
+      clone.querySelector(".bookmark-timestamp").textContent =
+        new Date(bookmark.createdAt).toLocaleString();
+
+      // Copy button
+      clone.querySelector(".copy-bookmark").addEventListener("click", () => {
+        navigator.clipboard.writeText(bookmark.url);
+        alert("Link copied!");
+      });
+
+      // Like button
+      const likeBtn = clone.querySelector(".like-bookmark");
+      likeBtn.textContent = ` Like (${bookmark.likes})`;
+      likeBtn.addEventListener("click", () => {
+      bookmark.likes++;
+      likeBtn.textContent = ` Like (${bookmark.likes})`;
+    });
+
+      bookmarkList.appendChild(clone);
+    });
+  }
+
+  //  Handle user selection change
+  userDropdown.addEventListener("change", (e) => {
+    renderUserBookmarks(e.target.value);
+  });
+
+  //  Handle adding a new bookmark
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const userId = userDropdown.value;
+
+    const newBookmark = {
+      id: crypto.randomUUID(),
+      userId,
+      title: titleInput.value,
+      description: descInput.value,
+      url: urlInput.value,
+      createdAt: Date.now(),
+      likes: 0
+    };
+
+    addBookmark(newBookmark);
+    renderUserBookmarks(userId);
+    form.reset();
+  });
+
+  // Initial load
+  loadUsers();
+});
