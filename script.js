@@ -91,23 +91,30 @@ function renderUserBookmarks(userId) {
   });
 
   //  Handle adding a new bookmark
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", (e) => { 
     e.preventDefault();
-    const userId = userDropdown.value;
+    
+    const clearTitle = titleInput.value.trim()
+    const clearUrl = urlInput.value.trim()
+    const hasHttp = clearUrl.includes("http://www.")
+    if (clearTitle.length >= 3 && hasHttp) {
+      
+      const userId = userDropdown.value;
+      const newBookmark = {
+        id: crypto.randomUUID(),
+        userId,
+        title: clearTitle ,
+        description: descInput.value,
+        url: clearUrl ,
+        createdAt: Date.now(),
+        likes: 0
+      };
 
-    const newBookmark = {
-      id: crypto.randomUUID(),
-      userId,
-      title: titleInput.value,
-      description: descInput.value,
-      url: urlInput.value,
-      createdAt: Date.now(),
-      likes: 0
-    };
+      addBookmark(newBookmark);
+      renderUserBookmarks(userId);
+      form.reset();
+    }
 
-    addBookmark(newBookmark);
-    renderUserBookmarks(userId);
-    form.reset();
   });
 
   // Initial load
