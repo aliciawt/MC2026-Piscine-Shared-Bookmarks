@@ -20,7 +20,11 @@ h2 {
     color: #333;
 }
 
-form {
+form.hidden{
+    display: none;
+}
+
+form.block{
     display: flex;
     flex-direction: column;
     max-width: 400px;
@@ -30,6 +34,7 @@ form {
     border-radius: 6px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
+
 
 input, textarea, select, button {
     padding: 6px 10px;
@@ -42,3 +47,8 @@ button:hover {
     background-color: lightgrey;
     cursor: pointer;
 }
+
+ #create-bookmark-button {
+    background-color: rgb(205, 61, 8);
+    color: #f0f0f0;
+ }

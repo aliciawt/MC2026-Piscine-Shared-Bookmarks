@@ -26,6 +26,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const userDropdown = document.getElementById("dropdown-username");
   const bookmarkList = document.getElementById("bookmark-list");
   const template = document.getElementById("bookmark-template");
+  const createBookmarkButton = document.querySelector("#create-bookmark-button")
+  createBookmarkButton.addEventListener("click" , (event)=>{
+    form.classList.toggle("block")
+    
+  })
 
   //  Load users into dropdown
   function loadUsers() {
