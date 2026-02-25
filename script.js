@@ -26,9 +26,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const userDropdown = document.getElementById("dropdown-username");
   const bookmarkList = document.getElementById("bookmark-list");
   const template = document.getElementById("bookmark-template");
-  const createBookmarkButton = document.querySelector("#create-bookmark-button")
-  createBookmarkButton.addEventListener("click" , (event)=>{
+  const toggleButton = document.querySelector("#create-bookmark-button")
+  console.log(toggleButton)
+  toggleButton.addEventListener("click" , (event)=>{
     form.classList.toggle("block")
+    toggleButton.textContent = toggleButton.textContent.includes("Add") ? "Cancel" :  "Add Bookmark"
     
   })
 
