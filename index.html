@@ -8,20 +8,22 @@
     <title>Bookmark App</title>
 
     <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
+    <script type="module" src="script.js" defer></script>
   </head>
 
   <body>
     <main>
       <h1>Shared Bookmarks App</h1>
 
-      <form id="new-bookmark-form">
+      <button id="create-bookmark-button"> Add Bookmark</button>
+
+      <form id="new-bookmark-form" class="hidden">
         <label for="input-bookmark-title">Bookmark title: </label>
-        <input id="input-bookmark-title" type="text" placeholder="My favorite site" minlength="2" required>
+        <input id="input-bookmark-title" type="text" placeholder="My favorite site" >
         <label for="input-bookmark-description">Description: </label>
         <textarea id="input-bookmark-description" minlength="2" placeholder="This site is full of my favorite things"></textarea>
         <label for="input-url">URL: </label>
-        <input id="input-url" type="url" required>
+        <input id="input-url" type="text">
         <button id="add-new-bookmark" type="submit">Add New Bookmark</button>
       </form>
 
@@ -37,7 +39,7 @@
 
       <template id="bookmark-template">
         <div class="bookmark-card">
-          <h3 class="bookmark-title"></h2>
+          <h3 class="bookmark-title"></h3>
           <p class="bookmark-description"></p>
           <p class="bookmark-timestamp"></p>
           <button class="copy-bookmark">Copy to Clipboard</button>
