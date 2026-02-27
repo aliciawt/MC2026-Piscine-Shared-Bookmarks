@@ -18,7 +18,7 @@ import { getUserIds } from "./storage.js";
 }
 
 // Wait for DOM to load
-window.addEventListener("DOMContentLoaded", () => {
+
   const form = document.getElementById("new-bookmark-form");
   const titleInput = document.getElementById("input-bookmark-title");
   const descInput = document.getElementById("input-bookmark-description");
@@ -74,23 +74,27 @@ function renderUserBookmarks(userId) {
       clone.querySelector(".bookmark-timestamp").textContent =
         new Date(bookmark.createdAt).toLocaleString();
 
-      // Copy button
-      clone.querySelector(".copy-bookmark").addEventListener("click", () => {
+      
+     // Copy button
+     const handleCopyButton = () => {
         navigator.clipboard.writeText(bookmark.url);
         alert("Link copied!");
-      });
+      }
+      clone.querySelector(".copy-bookmark").addEventListener("click", handleCopyButton);
 
-      // Like button
-      const likeBtn = clone.querySelector(".like-bookmark");
-      likeBtn.textContent = ` Like (${bookmark.likes})`;
-      likeBtn.addEventListener("click", () => {
+// Like button
+const handleLikeBtn = () => {
       bookmark.likes++;
-      likeBtn.textContent = ` Like (${bookmark.likes})`;
-    });
+      likeBtn.textContent = ` Like ❤️ (${bookmark.likes})`;
+    }
+      const likeBtn = clone.querySelector(".like-bookmark");
+      likeBtn.textContent = ` Like  ❤️ (${bookmark.likes})`;
+      likeBtn.addEventListener("click", handleLikeBtn);
 
       bookmarkList.appendChild(clone);
     });
   }
+  
 
   //  Handle user selection change
   userDropdown.addEventListener("change", (e) => {
@@ -126,4 +130,3 @@ function renderUserBookmarks(userId) {
 
   // Initial load
   loadUsers();
-});
