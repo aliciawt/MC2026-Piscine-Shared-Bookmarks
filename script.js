@@ -70,23 +70,16 @@ function renderUserBookmarks(userId) {
   bookmarks.forEach((bookmark) => {
     const clone = template.content.cloneNode(true);
 
-    // clone.querySelector(".bookmark-title").textContent = bookmark.title;
-    clone.querySelector(".bookmark-title").innerHTML =
-      `<a href="${bookmark.url}">${bookmark.title}</a?>`;
-    clone.querySelector(".bookmark-description").textContent =
-      bookmark.description;
-    clone.querySelector(".bookmark-timestamp").textContent = new Date(
-      bookmark.createdAt,
-    ).toLocaleString();
+    clone.querySelector(".bookmark-title").innerHTML = `<a href="${bookmark.url}">${bookmark.title}</a?>`;
+    clone.querySelector(".bookmark-description").textContent = bookmark.description;
+    clone.querySelector(".bookmark-timestamp").textContent = new Date(bookmark.createdAt,).toLocaleString();
 
     // Copy button
     const handleCopyButton = () => {
       navigator.clipboard.writeText(bookmark.url);
       alert("Link copied!");
     };
-    clone
-      .querySelector(".copy-bookmark")
-      .addEventListener("click", handleCopyButton);
+    clone.querySelector(".copy-bookmark").addEventListener("click", handleCopyButton);
 
     // Like button
     const handleLikeBtn = () => {
@@ -105,7 +98,6 @@ function renderUserBookmarks(userId) {
     const likeBtn = clone.querySelector(".like-bookmark");
     likeBtn.textContent = ` Like  ❤️ (${targetBookmark.likes})`;
     likeBtn.addEventListener("click", handleLikeBtn);
-
     bookmarkList.appendChild(clone);
   });
 }
@@ -121,7 +113,7 @@ form.addEventListener("submit", (e) => {
 
   const clearTitle = titleInput.value.trim();
   const clearUrl = urlInput.value.trim();
-  // const hasHttp = clearUrl.includes("http://www.");
+  
   if (clearTitle.length >= 3) {
     const userId = userDropdown.value;
     const newBookmark = {
