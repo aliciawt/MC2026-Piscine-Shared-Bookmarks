@@ -54,7 +54,7 @@ function loadUsers() {
 //  Render bookmarks for selected user
 function renderUserBookmarks(userId) {
   //Remove old bookmark cards
-  bookmarkList.querySelectorAll(".bookmark-card").forEach((el) => el.remove());
+  bookmarkList.querySelectorAll(".bookmark-card .empty-message").forEach((el) => el.remove());
 
   const bookmarks = getBookmarksByUser(userId);
   // console.log (bookmarks)
@@ -62,7 +62,7 @@ function renderUserBookmarks(userId) {
   if (bookmarks.length === 0) {
     const p = document.createElement("p");
     p.textContent = "No bookmarks yet for this user.";
-    p.className = "empty-message";
+    p.classList = "empty-message";
     bookmarkList.appendChild(p);
     return;
   }
@@ -70,7 +70,7 @@ function renderUserBookmarks(userId) {
   bookmarks.forEach((bookmark) => {
     const clone = template.content.cloneNode(true);
 
-    clone.querySelector(".bookmark-title").innerHTML = `<a href="${bookmark.url}">${bookmark.title}</a?>`;
+    clone.querySelector(".bookmark-title").innerHTML = `<a href="${bookmark.url}">${bookmark.title}</a>`;
     clone.querySelector(".bookmark-description").textContent = bookmark.description;
     clone.querySelector(".bookmark-timestamp").textContent = new Date(bookmark.createdAt,).toLocaleString();
 
@@ -98,8 +98,12 @@ function renderUserBookmarks(userId) {
     const likeBtn = clone.querySelector(".like-bookmark");
     likeBtn.textContent = ` Like  ❤️ (${targetBookmark.likes})`;
     likeBtn.addEventListener("click", handleLikeBtn);
+
     bookmarkList.appendChild(clone);
   });
+
+  // //SORTING
+  // const allBookmarks = JSON.parse(localStorage.getItem("bookmarks"));
 }
 
 //  Handle user selection change
