@@ -70,7 +70,9 @@ function renderUserBookmarks(userId) {
   bookmarks.forEach((bookmark) => {
     const clone = template.content.cloneNode(true);
 
-    clone.querySelector(".bookmark-title").textContent = bookmark.title;
+    // clone.querySelector(".bookmark-title").textContent = bookmark.title;
+    clone.querySelector(".bookmark-title").innerHTML =
+      `<a href="${bookmark.url}">${bookmark.title}</a?>`;
     clone.querySelector(".bookmark-description").textContent =
       bookmark.description;
     clone.querySelector(".bookmark-timestamp").textContent = new Date(
@@ -88,11 +90,20 @@ function renderUserBookmarks(userId) {
 
     // Like button
     const handleLikeBtn = () => {
-      bookmark.likes++;
-      likeBtn.textContent = ` Like ❤️ (${bookmark.likes})`;
+      const allBookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+      const targetBookmark = allBookmarks.find((b) => b.id === bookmark.id);
+
+      if (targetBookmark) {
+        targetBookmark.likes++;
+        localStorage.setItem("bookmarks", JSON.stringify(allBookmarks));
+        likeBtn.textContent = ` Like ❤️ (${targetBookmark.likes})`;
+      }
     };
+
+    const allBookmarks = JSON.parse(localStorage.getItem("bookmarks"));
+    const targetBookmark = allBookmarks.find((b) => b.id === bookmark.id);
     const likeBtn = clone.querySelector(".like-bookmark");
-    likeBtn.textContent = ` Like  ❤️ (${bookmark.likes})`;
+    likeBtn.textContent = ` Like  ❤️ (${targetBookmark.likes})`;
     likeBtn.addEventListener("click", handleLikeBtn);
 
     bookmarkList.appendChild(clone);
@@ -110,12 +121,12 @@ form.addEventListener("submit", (e) => {
 
   const clearTitle = titleInput.value.trim();
   const clearUrl = urlInput.value.trim();
-  const hasHttp = clearUrl.includes("http://www.");
-  if (clearTitle.length >= 3 && hasHttp) {
+  // const hasHttp = clearUrl.includes("http://www.");
+  if (clearTitle.length >= 3) {
     const userId = userDropdown.value;
     const newBookmark = {
       id: crypto.randomUUID(),
-      userId: userId,
+      userId,
       title: clearTitle,
       description: descInput.value,
       url: clearUrl,
