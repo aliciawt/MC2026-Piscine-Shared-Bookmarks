@@ -45,24 +45,29 @@ function loadUsers() {
     option.textContent = userId;
     userDropdown.appendChild(option);
   });
-
-  if (users.length > 0) {
-    renderUserBookmarks(users[0]);
-  }
 }
+  // if (users.length > 0) {
+  //   // renderUserBookmarks(users[0]);
+  // }
+  // loadUsers();
+  // renderUserBookmarks(userDropdown.value);
+
 
 //  Render bookmarks for selected user
 function renderUserBookmarks(userId) {
   //Remove old bookmark cards
-  bookmarkList.querySelectorAll(".bookmark-card .empty-message").forEach((el) => el.remove());
+  console.log(bookmarkList.innerHTML);
+  bookmarkList.querySelectorAll(".bookmark-card, .empty-message").forEach((el) => el.remove());
 
   const bookmarks = getBookmarksByUser(userId);
-  // console.log (bookmarks)
+  
+  //Sorting Reverse Chronological Order
+  bookmarks.sort((a, b) => b.createdAt - a.createdAt);
 
   if (bookmarks.length === 0) {
     const p = document.createElement("p");
     p.textContent = "No bookmarks yet for this user.";
-    p.classList = "empty-message";
+    p.className = "empty-message";
     bookmarkList.appendChild(p);
     return;
   }
@@ -102,8 +107,6 @@ function renderUserBookmarks(userId) {
     bookmarkList.appendChild(clone);
   });
 
-  // //SORTING
-  // const allBookmarks = JSON.parse(localStorage.getItem("bookmarks"));
 }
 
 //  Handle user selection change
@@ -138,3 +141,4 @@ form.addEventListener("submit", (e) => {
 
 // Initial load
 loadUsers();
+renderUserBookmarks(userDropdown.value);
