@@ -1,54 +1,121 @@
+:root {
+  --font-family: Arial, sans-serif;
+  --title-color: linear-gradient(to right, #0e7490, #3b82f6, #4f46e5);
+  --background-dark: #f2f7ff;
+  --background-light: #fcfdff;
+  --title-boxes-margin: 60px;
+  --webkit-shadow: 0px -1px 6px 2px rgba(0, 0, 0, 0.29);
+  --box-shadow: 0px -1px 6px 2px rgba(0, 0, 0, 0.29);
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f9f9f9;
-    color: #333;
+  font-family: var(--font-family);
+  /* margin: 20px; */
+  background-color: var(--background-dark);
+  color: #333;
+}
+
+.description {
+  margin: 0;
+}
+
+.icon {
+  height: 60px;
+  width: 60px;
+}
+
+.title-container {
+  margin: var(--title-boxes-margin);
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 5% 80% auto;
+  align-items: center;
+}
+
+.title-description {
+  margin-left: 10px;
+  justify-content: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-navs {
+  background-color: var(--background-light);
+  margin: var(--title-boxes-margin);
+  -webkit-box-shadow: var(--webkit-shadow);
+  box-shadow: var(--box-shadow);
+  margin-top: 0;
+  padding: 50px;
+  width: auto;
+  border-radius: 20px;
+}
+
+.navigation {
+  display: flex;
+  justify-content: flex-start; /* aligns buttons to the left */
+  gap: 20px; /* optional: space between buttons */
 }
 
 h1 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #222;
-    text-align: left;
+  margin: 0;
+  font-size: 28px;
+  font-weight: bold;
 }
 
 h2 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #333;
 }
 
-form.hidden{
-    display: none;
+form.hidden {
+  display: none;
 }
 
-form.block{
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    gap: 10px;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+form.block {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-
-input, textarea, select, button {
-    padding: 6px 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+input,
+textarea,
+select,
+button {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 button:hover {
-    background-color: lightgrey;
-    cursor: pointer;
+  background-color: lightgrey;
+  cursor: pointer;
 }
 
- #create-bookmark-button {
-    background-color: rgb(205, 61, 8);
-    color: #f0f0f0;
- }
+#create-bookmark-button {
+  background-color: rgb(205, 61, 8);
+  color: #f0f0f0;
+}
+
+.gradient-text {
+  background-image: linear-gradient(to right, #1d4ed8, #1e40af, #111827);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}

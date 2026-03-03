@@ -1,51 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A multi-user bookmark app built with JavaScript." />
 
-    <title>Bookmark App</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A multi-user bookmark app built with JavaScript." />
 
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js" defer></script>
-  </head>
+  <title>Bookmark App</title>
 
-  <body>
-    <main>
-      <h1>Shared Bookmarks App</h1>
+  <link rel="stylesheet" href="styles.css" />
+  <script type="module" src="script.js" defer></script>
+</head>
 
-      <button id="create-bookmark-button"> Add Bookmark</button>
+<body>
+  <main>
 
-      <form id="new-bookmark-form" class="hidden">
-        <label for="input-bookmark-title">Bookmark title: </label>
-        <input id="input-bookmark-title" type="text" placeholder="My favorite site" >
-        <label for="input-bookmark-description">Description: </label>
-        <textarea id="input-bookmark-description" minlength="2" placeholder="This site is full of my favorite things"></textarea>
-        <label for="input-url">URL: </label>
-        <input id="input-url" type="text">
-        <button id="add-new-bookmark" type="submit">Add New Bookmark</button>
-      </form>
+    <div class="title-container">
 
-      <div>
+      <img src="images/mark.png" class="icon">
+      <div class="title-description flex-column">
+        <h1 class="gradient-text">Bookmark Manager</h1>
+        <p class="description">Save and organize your favorite links</p>
+      </div>
+
+      <div class="navigation">
+        <a href="">About</a>
+        <a href="">Contact</a>
+        <a href="">Profiles</a>
+      </div>
+      
+    </div>
+
+    <div class="button-navs">
+      <div class="flex-column">
         <label for="dropdown-username">Select user:</label>
         <select id="dropdown-username">
         </select>
       </div>
+      <button id="create-bookmark-button"> Add Bookmark</button>
+      <form id="new-bookmark-form" class="hidden">
+        <label for="input-bookmark-title">Bookmark title: </label>
+        <input id="input-bookmark-title" type="text" placeholder="My favorite site">
+        <label for="input-bookmark-description">Description: </label>
+        <textarea id="input-bookmark-description" minlength="2"
+          placeholder="This site is full of my favorite things"></textarea>
+        <label for="input-url">URL: </label>
+        <input id="input-url" type="text">
+        <button id="add-new-bookmark" type="submit">Add New Bookmark</button>
+      </form>
+    </div>
 
-      <section id="bookmark-list">
-        <h2>Bookmark List</h2>
-      </section>
 
-      <template id="bookmark-template">
-        <div class="bookmark-card">
-          <h3 class="bookmark-title"></h3>
-          <p class="bookmark-description"></p>
-          <p class="bookmark-timestamp"></p>
-          <button class="copy-bookmark">Copy to Clipboard</button>
-          <button class="like-bookmark">❤️ Like</button>
-        </div>
-      </template>
-    </main>    
-  </body>
+
+
+
+
+    <section id="bookmark-list">
+      <h2>Bookmark List</h2>
+    </section>
+
+    <template id="bookmark-template">
+      <div class="bookmark-card">
+        <h3 class="bookmark-title"></h3>
+        <p class="bookmark-description"></p>
+        <p class="bookmark-timestamp"></p>
+        <button class="copy-bookmark">Copy to Clipboard</button>
+        <button class="like-bookmark">❤️ Like</button>
+      </div>
+    </template>
+  </main>
+</body>
+
 </html>
