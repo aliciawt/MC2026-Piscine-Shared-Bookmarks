@@ -75,7 +75,7 @@ function renderUserBookmarks(userId) {
   bookmarks.forEach((bookmark) => {
     const clone = template.content.cloneNode(true);
 
-    clone.querySelector(".bookmark-title").innerHTML = `<a href="${bookmark.url}">${bookmark.title}</a>`;
+    clone.querySelector(".bookmark-title").innerHTML = `<a href="${bookmark.url}" class="bookmark-title">${bookmark.title}</a>`;
     clone.querySelector(".bookmark-description").textContent = bookmark.description;
     clone.querySelector(".bookmark-timestamp").textContent = new Date(bookmark.createdAt,).toLocaleString();
 

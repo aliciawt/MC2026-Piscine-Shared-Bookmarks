@@ -64,12 +64,6 @@ body {
   border-radius: var(--border-radius);
 }
 
-.navigation {
-  display: flex;
-  justify-content: flex-start;
-  gap: var(--size-20);
-}
-
 h1 {
   margin: 0;
   font-size: 30px;
@@ -81,6 +75,9 @@ h2 {
   font-size: 25px;
   font-weight: bold;
   margin: 0;
+}
+
+h3 {
 }
 
 form.hidden {
@@ -128,9 +125,9 @@ button:hover,
 }
 
 #bookmark-list {
-  margin: 60px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin: 50px;
+  margin-top: var(--size-20);
+  margin-bottom: var(--size-20);
 }
 
 .bookmark-card {
@@ -149,4 +146,8 @@ label {
 .like-bookmark {
   color: var(--color-light);
   background-color: var(--button-color);
+}
+
+.bookmark-title {
+  text-decoration: none;
 }
