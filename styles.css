@@ -1,9 +1,13 @@
 :root {
   --font-family: Arial, sans-serif;
-  --title-color: linear-gradient(to right, #0e7490, #3b82f6, #4f46e5);
+  --title-color: rgba(30, 28, 128, 0.77);
   --background: linear-gradient(to bottom left, #0f172a, #1e1a78, #0f172a);
+  --button-color: #150050;
+  --border-radius: 25px;
+  --border-radius-form: 6px;
   --color-dark: black;
   --color-light: #f2f7ff;
+  --color-light-secondary: #fcfdff;
   --title-boxes-margin: 50px;
   --webkit-shadow: 0px -1px 6px 2px rgba(0, 0, 0, 0.29);
   --box-shadow: 0px -1px 6px 2px rgba(0, 0, 0, 0.29);
@@ -57,7 +61,7 @@ body {
   margin-bottom: 0;
   padding: 30px;
   width: auto;
-  border-radius: var(--size-20);
+  border-radius: var(--border-radius);
 }
 
 .navigation {
@@ -90,40 +94,37 @@ form.block {
   gap: 10px;
   padding: 15px;
   background-color: #f0f0f0;
-  border-radius: 6px;
+  border-radius: var(--border-radius-form);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 input,
 textarea,
-select,
-button {
-  padding: 6px 10px;
+select {
+  padding: 8px 14px;
   font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: var(--border-radius);
 }
 
-button:hover {
+button {
+  border-radius: var(--border-radius);
+  padding: 10px 10px;
+}
+
+button:hover,
+#create-bookmark-button:hover {
   background-color: lightgrey;
   cursor: pointer;
 }
 
 #create-bookmark-button {
-  background-color: rgb(205, 61, 8);
+  background: var(--button-color);
   color: var(--color-light);
   margin: var(--size-20);
   margin-left: 0;
-  padding: 20px 40px;
-  border-radius: 25px;
-}
-
-.gradient-text {
-  background-image: linear-gradient(to right, #1d4ed8, #1e40af, #fe3b00);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+  padding: 10px 30px;
+  border-radius: var(--border-radius);
 }
 
 #bookmark-list {
@@ -135,10 +136,17 @@ button:hover {
 .bookmark-card {
   padding: var(--size-20);
   margin-top: 20px;
-  border-radius: 20px;
+  border-radius: var(--border-radius);
   background-color: var(--color-light);
+  color: var(--color-dark);
 }
 
 label {
   color: var(--color-dark);
+}
+
+.copy-bookmark,
+.like-bookmark {
+  color: var(--color-light);
+  background-color: var(--button-color);
 }
