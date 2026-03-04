@@ -122,6 +122,7 @@ form.addEventListener("submit", (e) => {
 
   const clearTitle = titleInput.value.trim();
   const clearUrl = urlInput.value.trim();
+  const clearDesc = descInput.value.trim();
 
   try {
     new URL(clearUrl);
@@ -130,13 +131,13 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  if (clearTitle.length >= 3) {
+  if (clearTitle.length >= 3 && clearDesc.length >= 2) {
     const userId = userDropdown.value;
     const newBookmark = {
       id: crypto.randomUUID(),
       userId,
       title: clearTitle,
-      description: descInput.value,
+      description: clearDesc,
       url: clearUrl,
       createdAt: Date.now(),
       likes: 0,
@@ -146,7 +147,7 @@ form.addEventListener("submit", (e) => {
     renderUserBookmarks(userId);
     form.reset();
   } else {
-    alert("Please fix your title. Minimum of 3 Character");
+    alert("There's an error please check your input");
   }
 });
 
