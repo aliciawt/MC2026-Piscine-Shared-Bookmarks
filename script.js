@@ -21,7 +21,6 @@ const userDropdown = document.getElementById("dropdown-username");
 const bookmarkList = document.getElementById("bookmark-list");
 const template = document.getElementById("bookmark-template");
 const toggleButton = document.querySelector("#create-bookmark-button");
-console.log(toggleButton);
 toggleButton.addEventListener("click", () => {
   form.classList.toggle("block");
   toggleButton.textContent = toggleButton.textContent.includes("Add")
@@ -44,7 +43,6 @@ function loadUsers() {
 //  Render bookmarks for selected user
 function renderUserBookmarks(userId) {
   //Remove old bookmark cards
-  console.log(bookmarkList.innerHTML);
   bookmarkList
     .querySelectorAll(".bookmark-card, .empty-message")
     .forEach((el) => el.remove());
@@ -116,6 +114,13 @@ form.addEventListener("submit", (e) => {
   const clearTitle = titleInput.value.trim();
   const clearUrl = urlInput.value.trim();
 
+  try {
+    new URL(clearUrl);
+  } catch {
+    alert("Please enter a valid URL (include https:// or http://)");
+    return;
+  }
+
   if (clearTitle.length >= 3) {
     const userId = userDropdown.value;
     const newBookmark = {
@@ -131,6 +136,8 @@ form.addEventListener("submit", (e) => {
     addBookmark(newBookmark);
     renderUserBookmarks(userId);
     form.reset();
+  } else {
+    alert("Please fix your title. Minimum of 3 Character");
   }
 });
 
