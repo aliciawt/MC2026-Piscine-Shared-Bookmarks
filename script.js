@@ -63,6 +63,15 @@ function renderUserBookmarks(userId) {
   bookmarks.forEach((bookmark) => {
     const clone = template.content.cloneNode(true);
 
+    const titleElement = clone.querySelector(".bookmark-title");
+    titleElement.textContent = "";
+    const link = document.createElement("a");
+    link.href = bookmark.url;
+    link.textContent = bookmark.title;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    titleElement.appendChild(link);
+
     clone.querySelector(".bookmark-title").innerHTML =
       `<a href="${bookmark.url}" class="bookmark-title">${bookmark.title}</a>`;
     clone.querySelector(".bookmark-description").textContent =
