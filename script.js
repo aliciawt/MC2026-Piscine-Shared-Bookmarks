@@ -1,9 +1,3 @@
-// This is a placeholder file which shows how you can access functions defined in other files.
-// It can be loaded into index.html.
-// You can delete the contents of the file once you have understood how it works.
-// Note that when running locally, in order to open a web page which uses modules, you must serve the directory over HTTP e.g. with https://www.npmjs.com/package/http-server
-// You can't open the index.html file using a file:// URL.
-
 import { getUserIds } from "./storage.js";
 
 function getBookmarksByUser(userId) {
@@ -46,21 +40,17 @@ function loadUsers() {
     userDropdown.appendChild(option);
   });
 }
-  // if (users.length > 0) {
-  //   // renderUserBookmarks(users[0]);
-  // }
-  // loadUsers();
-  // renderUserBookmarks(userDropdown.value);
-
 
 //  Render bookmarks for selected user
 function renderUserBookmarks(userId) {
   //Remove old bookmark cards
   console.log(bookmarkList.innerHTML);
-  bookmarkList.querySelectorAll(".bookmark-card, .empty-message").forEach((el) => el.remove());
+  bookmarkList
+    .querySelectorAll(".bookmark-card, .empty-message")
+    .forEach((el) => el.remove());
 
   const bookmarks = getBookmarksByUser(userId);
-  
+
   //Sorting Reverse Chronological Order
   bookmarks.sort((a, b) => b.createdAt - a.createdAt);
 
@@ -75,16 +65,22 @@ function renderUserBookmarks(userId) {
   bookmarks.forEach((bookmark) => {
     const clone = template.content.cloneNode(true);
 
-    clone.querySelector(".bookmark-title").innerHTML = `<a href="${bookmark.url}" class="bookmark-title">${bookmark.title}</a>`;
-    clone.querySelector(".bookmark-description").textContent = bookmark.description;
-    clone.querySelector(".bookmark-timestamp").textContent = new Date(bookmark.createdAt,).toLocaleString();
+    clone.querySelector(".bookmark-title").innerHTML =
+      `<a href="${bookmark.url}" class="bookmark-title">${bookmark.title}</a>`;
+    clone.querySelector(".bookmark-description").textContent =
+      bookmark.description;
+    clone.querySelector(".bookmark-timestamp").textContent = new Date(
+      bookmark.createdAt,
+    ).toLocaleString();
 
     // Copy button
     const handleCopyButton = () => {
       navigator.clipboard.writeText(bookmark.url);
       alert("Link copied!");
     };
-    clone.querySelector(".copy-bookmark").addEventListener("click", handleCopyButton);
+    clone
+      .querySelector(".copy-bookmark")
+      .addEventListener("click", handleCopyButton);
 
     // Like button
     const handleLikeBtn = () => {
@@ -106,7 +102,6 @@ function renderUserBookmarks(userId) {
 
     bookmarkList.appendChild(clone);
   });
-
 }
 
 //  Handle user selection change
@@ -120,7 +115,7 @@ form.addEventListener("submit", (e) => {
 
   const clearTitle = titleInput.value.trim();
   const clearUrl = urlInput.value.trim();
-  
+
   if (clearTitle.length >= 3) {
     const userId = userDropdown.value;
     const newBookmark = {
