@@ -1,18 +1,19 @@
 :root {
   --font-family: Arial, sans-serif;
   --title-color: linear-gradient(to right, #0e7490, #3b82f6, #4f46e5);
-  --background-dark: #f2f7ff;
-  --background-light: #fcfdff;
-  --title-boxes-margin: 60px;
+  --background: linear-gradient(to bottom left, #0f172a, #1e1a78, #0f172a);
+  --color-dark: black;
+  --color-light: #f2f7ff;
+  --title-boxes-margin: 50px;
   --webkit-shadow: 0px -1px 6px 2px rgba(0, 0, 0, 0.29);
   --box-shadow: 0px -1px 6px 2px rgba(0, 0, 0, 0.29);
+  --size-20: 20px;
 }
 
 body {
   font-family: var(--font-family);
-  /* margin: 20px; */
-  background-color: var(--background-dark);
-  color: #333;
+  background: var(--background);
+  color: var(--color-light);
 }
 
 .description {
@@ -26,7 +27,7 @@ body {
 
 .title-container {
   margin: var(--title-boxes-margin);
-  margin-bottom: 20px;
+  margin-bottom: var(--size-20);
   display: grid;
   grid-template-columns: 5% 80% auto;
   align-items: center;
@@ -48,33 +49,34 @@ body {
 }
 
 .button-navs {
-  background-color: var(--background-light);
+  background-color: var(--color-light);
   margin: var(--title-boxes-margin);
   -webkit-box-shadow: var(--webkit-shadow);
   box-shadow: var(--box-shadow);
   margin-top: 0;
-  padding: 50px;
+  margin-bottom: 0;
+  padding: 30px;
   width: auto;
-  border-radius: 20px;
+  border-radius: var(--size-20);
 }
 
 .navigation {
   display: flex;
-  justify-content: flex-start; /* aligns buttons to the left */
-  gap: 20px; /* optional: space between buttons */
+  justify-content: flex-start;
+  gap: var(--size-20);
 }
 
 h1 {
   margin: 0;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: bold;
+  color: var(--color-light);
 }
 
 h2 {
-  font-size: 22px;
+  font-size: 25px;
   font-weight: bold;
-  margin-bottom: 10px;
-  color: #333;
+  margin: 0;
 }
 
 form.hidden {
@@ -109,13 +111,34 @@ button:hover {
 
 #create-bookmark-button {
   background-color: rgb(205, 61, 8);
-  color: #f0f0f0;
+  color: var(--color-light);
+  margin: var(--size-20);
+  margin-left: 0;
+  padding: 20px 40px;
+  border-radius: 25px;
 }
 
 .gradient-text {
-  background-image: linear-gradient(to right, #1d4ed8, #1e40af, #111827);
+  background-image: linear-gradient(to right, #1d4ed8, #1e40af, #fe3b00);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
   -webkit-text-fill-color: transparent;
+}
+
+#bookmark-list {
+  margin: 60px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.bookmark-card {
+  padding: var(--size-20);
+  margin-top: 20px;
+  border-radius: 20px;
+  background-color: var(--color-light);
+}
+
+label {
+  color: var(--color-dark);
 }
