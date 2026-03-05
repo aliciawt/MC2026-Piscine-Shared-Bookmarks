@@ -1,44 +1,149 @@
+:root {
+  --font-family: Arial, sans-serif;
+  --title-color: rgba(30, 28, 128, 0.77);
+  --background: linear-gradient(to bottom left, #0f172a, #1e1a78, #0f172a);
+  --button-color: #150050;
+  --border-radius: 25px;
+  --border-radius-form: 6px;
+  --color-dark: black;
+  --color-light: #f2f7ff;
+  --color-light-secondary: #fcfdff;
+  --title-boxes-margin: 50px;
+  --webkit-shadow: 0px -1px 6px 2px rgba(0, 0, 0, 0.29);
+  --box-shadow: 0px -1px 6px 2px rgba(0, 0, 0, 0.29);
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f9f9f9;
-    color: #333;
+  font-family: var(--font-family);
+  background: var(--background);
+  color: var(--color-light);
+}
+
+.description {
+  margin: 0;
+}
+
+.icon {
+  height: 60px;
+  width: 60px;
+}
+
+.title-container {
+  margin: var(--title-boxes-margin);
+  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: 5% 80% auto;
+  align-items: center;
+}
+
+.title-description {
+  margin-left: 10px;
+  justify-content: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-navs {
+  background-color: var(--color-light);
+  margin: var(--title-boxes-margin);
+  -webkit-box-shadow: var(--webkit-shadow);
+  box-shadow: var(--box-shadow);
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 30px;
+  width: auto;
+  border-radius: var(--border-radius);
 }
 
 h1 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #222;
-    text-align: left;
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+  color: var(--color-light);
 }
 
 h2 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #333;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    gap: 10px;
-    padding: 15px;
-    background-color: #f0f0f0;
-    border-radius: 6px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+form.hidden {
+  display: none;
 }
 
-input, textarea, select, button {
-    padding: 6px 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+form.block {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  gap: 10px;
+  padding: 15px;
+  background-color: #f0f0f0;
+  border-radius: var(--border-radius-form);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-button:hover {
-    background-color: lightgrey;
-    cursor: pointer;
+input,
+textarea,
+select {
+  padding: 8px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+}
+
+button {
+  border-radius: var(--border-radius);
+  padding: 10px 10px;
+}
+
+button:hover,
+#create-bookmark-button:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}
+
+#create-bookmark-button {
+  background: var(--button-color);
+  color: var(--color-light);
+  margin: 20px;
+  margin-left: 0;
+  padding: 10px 30px;
+  border-radius: var(--border-radius);
+}
+
+#bookmark-list {
+  margin: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.bookmark-card {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: var(--border-radius);
+  background-color: var(--color-light);
+  color: var(--color-dark);
+}
+
+label {
+  color: var(--color-dark);
+}
+
+.copy-bookmark,
+.like-bookmark {
+  color: var(--color-light);
+  background-color: var(--button-color);
+}
+
+.bookmark-title {
+  text-decoration: none;
 }
