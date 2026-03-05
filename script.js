@@ -1,4 +1,5 @@
 import { getUserIds } from "./storage.js";
+export { getBookmarksByUser, addBookmark, likeBookmark, copyBookmark };
 
 function getBookmarksByUser(userId) {
   const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
@@ -10,8 +11,6 @@ function addBookmark(bookmark) {
   allBookmarks.push(bookmark);
   localStorage.setItem("bookmarks", JSON.stringify(allBookmarks));
 }
-
-// Wait for DOM to load
 
 const form = document.getElementById("new-bookmark-form");
 const titleInput = document.getElementById("input-bookmark-title");
@@ -38,6 +37,25 @@ function loadUsers() {
     option.textContent = userId;
     userDropdown.appendChild(option);
   });
+}
+
+// handle copy button
+function copyBookmark(url) {
+  navigator.clipboard.writeText(url);
+  alert("Link copied!");
+}
+
+// handle like button
+function likeBookmark(bookmarkId) {
+  const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+  const targetBookmark = allBookmarks.find((b) => b.id === bookmarkId);
+
+  if (!targetBookmark) return null;
+
+  targetBookmark.likes++;
+  localStorage.setItem("bookmarks", JSON.stringify(allBookmarks));
+
+  return targetBookmark.likes;
 }
 
 //  Render bookmarks for selected user
@@ -72,8 +90,6 @@ function renderUserBookmarks(userId) {
     link.rel = "noopener noreferrer";
     titleElement.appendChild(link);
 
-    clone.querySelector(".bookmark-title").innerHTML =
-      `<a href="${bookmark.url}" class="bookmark-title">${bookmark.title}</a>`;
     clone.querySelector(".bookmark-description").textContent =
       bookmark.description;
     clone.querySelector(".bookmark-timestamp").textContent = new Date(
@@ -81,31 +97,22 @@ function renderUserBookmarks(userId) {
     ).toLocaleString();
 
     // Copy button
-    const handleCopyButton = () => {
-      navigator.clipboard.writeText(bookmark.url);
-      alert("Link copied!");
-    };
     clone
-      .querySelector(".copy-bookmark")
-      .addEventListener("click", handleCopyButton);
+    .querySelector(".copy-bookmark")
+    .addEventListener("click", () => copyBookmark(bookmark.url));
 
     // Like button
-    const handleLikeBtn = () => {
-      const allBookmarks = JSON.parse(localStorage.getItem("bookmarks"));
-      const targetBookmark = allBookmarks.find((b) => b.id === bookmark.id);
-
-      if (targetBookmark) {
-        targetBookmark.likes++;
-        localStorage.setItem("bookmarks", JSON.stringify(allBookmarks));
-        likeBtn.textContent = ` Like ❤️ (${targetBookmark.likes})`;
-      }
-    };
-
-    const allBookmarks = JSON.parse(localStorage.getItem("bookmarks"));
-    const targetBookmark = allBookmarks.find((b) => b.id === bookmark.id);
     const likeBtn = clone.querySelector(".like-bookmark");
-    likeBtn.textContent = ` Like  ❤️ (${targetBookmark.likes})`;
-    likeBtn.addEventListener("click", handleLikeBtn);
+
+    const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+    const targetBookmark = allBookmarks.find((b) => b.id === bookmark.id);
+
+    likeBtn.textContent = `Like ❤️ (${targetBookmark.likes})`;
+
+    likeBtn.addEventListener("click", () => {
+      const newLikes = likeBookmark(bookmark.id);
+      likeBtn.textContent = `Like ❤️ (${newLikes})`;
+    });
 
     bookmarkList.appendChild(clone);
   });

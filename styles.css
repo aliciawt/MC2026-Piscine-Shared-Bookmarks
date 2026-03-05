@@ -32,13 +32,14 @@ body {
   margin: var(--title-boxes-margin);
   margin-bottom: 20px;
   display: grid;
-  grid-template-columns: 5% 80% auto;
+  grid-template-columns: 60px 1fr auto;
   align-items: center;
+  gap: 10px;
 }
 
 .title-description {
   margin-left: 10px;
-  justify-content: center;
+  word-break: break-word;
 }
 
 .flex-row {
@@ -107,7 +108,8 @@ button {
 
 button:hover,
 #create-bookmark-button:hover {
-  background-color: lightgrey;
+  background-color: var(--color-light);
+  color: var(--button-color);
   cursor: pointer;
 }
 
