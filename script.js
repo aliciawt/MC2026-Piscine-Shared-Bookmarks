@@ -1,4 +1,5 @@
 import { getUserIds } from "./storage.js";
+export { getBookmarksByUser, addBookmark, renderUserBookmarks, likeBookmark, copyBookmark };
 
 function getBookmarksByUser(userId) {
   const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
@@ -7,11 +8,10 @@ function getBookmarksByUser(userId) {
 
 function addBookmark(bookmark) {
   const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
+  console.log(allBookmarks);
   allBookmarks.push(bookmark);
   localStorage.setItem("bookmarks", JSON.stringify(allBookmarks));
 }
-
-// Wait for DOM to load
 
 const form = document.getElementById("new-bookmark-form");
 const titleInput = document.getElementById("input-bookmark-title");
