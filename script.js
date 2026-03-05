@@ -1,5 +1,5 @@
 import { getUserIds } from "./storage.js";
-export { getBookmarksByUser, addBookmark, renderUserBookmarks, likeBookmark, copyBookmark };
+export { getBookmarksByUser, addBookmark, likeBookmark, copyBookmark };
 
 function getBookmarksByUser(userId) {
   const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
