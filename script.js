@@ -8,7 +8,6 @@ function getBookmarksByUser(userId) {
 
 function addBookmark(bookmark) {
   const allBookmarks = JSON.parse(localStorage.getItem("bookmarks") || "[]");
-  console.log(allBookmarks);
   allBookmarks.push(bookmark);
   localStorage.setItem("bookmarks", JSON.stringify(allBookmarks));
 }
