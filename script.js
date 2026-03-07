@@ -138,7 +138,7 @@ form.addEventListener("submit", (e) => {
     return;
   }
 
-  if (clearTitle.length >= 3 && clearDesc.length >= 2) {
+  if (clearTitle.length >= 2 && clearDesc.length >= 2) {
     const userId = userDropdown.value;
     const newBookmark = {
       id: crypto.randomUUID(),
